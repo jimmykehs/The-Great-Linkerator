@@ -8,7 +8,6 @@ const {
   getAllLinkTags,
   createLinkTag,
   updateClickCount,
-  attachTagstoLink,
   getAllLinkTagsWithTags,
 } = require("./index");
 
