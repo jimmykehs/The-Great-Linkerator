@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
+import './App.css';
+
 import {
-  getSomething
+  getSomething,
+  getLinks,
+  getTags,
+  getLinksById,
+  createLink,
 } from '../api';
 
 const App = () => {
