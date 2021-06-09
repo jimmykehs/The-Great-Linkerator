@@ -25,8 +25,70 @@ async function createLink({
     throw error;
   }
 }
+
+//createTags
+async function createTags({tag_content}) {
+  try {
+    const { rows } = await client.query(`
+    INSERT INTO tags(tag_content)
+    VALUES ($1)
+    RETURNING *;
+    `, [tag_content])
+    console.log(rows)
+    return rows;
+  } catch (error) {
+    throw error
+  }
+}
+
+async function getAllLinks() {
+  try {
+    console.log("Starting to get all links")
+    const { rows } = await client.query(`
+    SELECT *
+    FROM links;
+    `)
+    return {rows}
+  } catch (error) {
+    throw error
+  }
+}
+
+async function getAllLinkTags() {
+  try {
+    const { rows } = await client.query(`
+    SELECT *
+    FROM link_tags;
+    `)
+    console.log(rows)
+    return rows
+  } catch (error) {
+    throw error 
+  }
+}
+
+async function createLinkTag(linkId, tagId) {
+  try {
+    await client.query(`
+    INSERT INTO link_tags("linkId", "tagId")
+    VALUES ($1, $2)
+    ON CONFLICT ("linkId", "tagId") DO NOTHING
+    `, [linkId, tagId])
+  } catch (error) {
+    throw error
+  }
+}
+
+//async function updateClickCount
+
+//function that joins links and tags and adds tags to said link
+
 // export
 module.exports = {
   client,
-  createLink
+  createLink,
+  createTags,
+  getAllLinks,
+  getAllLinkTags,
+  createLinkTag
 }
