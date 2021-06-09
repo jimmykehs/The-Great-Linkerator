@@ -31,7 +31,6 @@ async function createLink({
   }
 }
 
-
 //createTags
 async function createTags({ tag_content }) {
   try {
@@ -81,7 +80,7 @@ async function getAllLinkTagsWithTags() {
     FROM links;
     `);
 
-    return await attachTagstoLink(rows);
+    return await attachTagsToLink(rows);
   } catch (error) {
     throw error;
   }
@@ -117,7 +116,7 @@ async function updateClickCount(linkId, count) {
   }
 }
 
-async function attachTagstoLink(allLinks) {
+async function attachTagsToLink(allLinks) {
   const linkIds = allLinks.map((link) => link.id);
   const inString = allLinks.map((_, index) => `$${index + 1}`).join(", ");
 
@@ -153,6 +152,5 @@ module.exports = {
   getAllLinkTags,
   createLinkTag,
   updateClickCount,
-  attachTagstoLink,
   getAllLinkTagsWithTags,
 };
