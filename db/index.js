@@ -5,9 +5,6 @@ const DB_URL = process.env.DATABASE_URL || `https://localhost:5432/${ DB_NAME }`
 const client = new Client(DB_URL);
 
 // database methods
-<<<<<<< HEAD
-client.connect()
-=======
 async function createLink({ 
   link_name,
   link_url,
@@ -28,7 +25,6 @@ async function createLink({
     throw error;
   }
 }
->>>>>>> main
 // export
 module.exports = {
   client,
