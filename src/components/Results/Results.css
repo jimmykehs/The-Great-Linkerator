@@ -1,0 +1,27 @@
+.Results {
+  background-color: rgb(218, 218, 218);
+  height: 80%;
+  border-radius: 0 0 10px 10px;
+  overflow-y: scroll;
+}
+
+table {
+  max-height: 100%;
+}
+
+.Result-Headers {
+  height: 5%;
+}
+
+th,
+td {
+  padding: 30px;
+}
+
+.Bookmark-Row {
+  height: 10%;
+}
+
+.Bookmark-Row td {
+  text-align: center;
+}
