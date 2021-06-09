@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { BookmarkCard, SearchBar } from "./index";
+import { BookmarkCard, SearchBar, Title, Results } from "./index";
 
 import "./App.css";
 
@@ -14,21 +14,27 @@ const App = () => {
     const testData = [
       {
         id: 1,
-        name: "Google",
-        url: "www.google.com",
-        clickCount: 0,
+        link_name: "Google",
+        link_url: "www.google.com",
+        link_view_count: 0,
+        link_comment: "Search Stuff",
+        creationDT: "June 6, 2021 12:04AM",
       },
       {
         id: 2,
-        name: "Youtube",
-        url: "www.youtube.com",
-        clickCount: 0,
+        link_name: "Twitter",
+        link_url: "www.twitter.com",
+        link_view_count: 10,
+        link_comment: "Tweet Stuff",
+        creationDT: "June 6, 2021 12:05AM",
       },
       {
         id: 3,
-        name: "Twitter",
-        url: "www.twitter.com",
-        clickCount: 0,
+        link_name: "Reddit",
+        link_url: "www.reddit.com",
+        link_view_count: 80,
+        link_comment: "Talk about anything",
+        creationDT: "June 6, 2021 12:06AM",
       },
     ];
 
@@ -38,13 +44,9 @@ const App = () => {
 
   return (
     <div className="App">
+      <Title />
       <SearchBar setSearchResults={setSearchResults} />
-
-      <div className="Search-Results">
-        {searchResults.map((bookmark) => {
-          return <BookmarkCard key={bookmark.id} bookmark={bookmark} />;
-        })}
-      </div>
+      <Results searchResults={searchResults} />
     </div>
   );
 };
