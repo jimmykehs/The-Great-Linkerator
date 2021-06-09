@@ -6,7 +6,8 @@ const {
   createTags,
   getAllLinks,
   getAllLinkTags,
-  createLinkTag
+  createLinkTag,
+  updateClickCount
 } = require('./index');
 
 async function buildTables() {
@@ -92,8 +93,9 @@ async function populateInitialData() {
       tag_content: "Music"
     })
     await createLinkTag(1, 1)
-    await getAllLinks()
     await getAllLinkTags()
+    await updateClickCount(1, 10)
+    await getAllLinks()
     console.log("finished creating links")
   } catch (error) {
     throw error;
