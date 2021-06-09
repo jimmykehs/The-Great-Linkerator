@@ -3,7 +3,8 @@ import React from "react";
 const SearchBar = () => {
   return (
     <div className="Search-Bar">
-      <h1>SearchBar Component</h1>
+      <input type="text" placeholder="Search sites or tags" />
+      <button>Add Bookmark</button>
     </div>
   );
 };
