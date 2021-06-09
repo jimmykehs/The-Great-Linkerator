@@ -1,52 +1,31 @@
-const apiRouter = require('express').Router();
+const apiRouter = require("express").Router();
 
+const { getAllLinkTagsWithTags } = require("../db");
 
 apiRouter.get("/links", async (req, res, next) => {
   try {
-    
-  } catch (error) {
-    
-  }
-})
-
-
+    res.send(await getAllLinkTagsWithTags());
+  } catch (error) {}
+});
 
 apiRouter.get("/tags", async (req, res, next) => {
   try {
-    
-  } catch (error) {
-    
-  }
-})
-
-
+  } catch (error) {}
+});
 
 apiRouter.get("/:tagName/links", async (req, res, next) => {
   try {
-    
-  } catch (error) {
-    
-  }
-})
-
-
+  } catch (error) {}
+});
 
 apiRouter.post("/links", async (req, res, next) => {
   try {
-    
-  } catch (error) {
-    
-  }
-})
-
-
+  } catch (error) {}
+});
 
 apiRouter.patch("/links/:id", async (req, res, next) => {
   try {
-    
-  } catch (error) {
-    
-  }
-})
+  } catch (error) {}
+});
 
 module.exports = apiRouter;
