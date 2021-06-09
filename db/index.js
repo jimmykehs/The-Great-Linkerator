@@ -77,7 +77,7 @@ async function getAllLinkTagsWithTags() {
   try {
     const { rows } = await client.query(`
     SELECT *
-    FROM link_tags;
+    FROM links;
     `);
 
     return await attachTagstoLink(rows);
