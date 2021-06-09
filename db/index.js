@@ -48,6 +48,7 @@ async function getAllLinks() {
     SELECT *
     FROM links;
     `)
+    console.log(rows)
     return {rows}
   } catch (error) {
     throw error
@@ -79,7 +80,17 @@ async function createLinkTag(linkId, tagId) {
   }
 }
 
-//async function updateClickCount
+async function updateClickCount(linkId, count) {
+  try {
+    await client.query(`
+    UPDATE links
+    SET link_view_count = $1
+    WHERE ID = $2
+    `, [++count, linkId])
+  } catch (error) {
+    throw error
+  }
+}
 
 //function that joins links and tags and adds tags to said link
 
@@ -90,5 +101,6 @@ module.exports = {
   createTags,
   getAllLinks,
   getAllLinkTags,
-  createLinkTag
+  createLinkTag,
+  updateClickCount
 }
