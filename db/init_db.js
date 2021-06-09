@@ -4,10 +4,7 @@ const {
   client,
   createLink,
   createTags,
-  getAllLinks,
-  getAllLinkTags,
   createLinkTag,
-  updateClickCount,
   getAllLinkTagsWithTags,
 } = require("./index");
 
