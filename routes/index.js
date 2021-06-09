@@ -1,9 +1,52 @@
 const apiRouter = require('express').Router();
 
-apiRouter.get("/", (req, res, next) => {
-  res.send({
-    message: "API is under construction!"
-  });
-});
+
+apiRouter.get("/links", async (req, res, next) => {
+  try {
+    
+  } catch (error) {
+    
+  }
+})
+
+
+
+apiRouter.get("/tags", async (req, res, next) => {
+  try {
+    
+  } catch (error) {
+    
+  }
+})
+
+
+
+apiRouter.get("/:tagName/links", async (req, res, next) => {
+  try {
+    
+  } catch (error) {
+    
+  }
+})
+
+
+
+apiRouter.post("/links", async (req, res, next) => {
+  try {
+    
+  } catch (error) {
+    
+  }
+})
+
+
+
+apiRouter.patch("/links/:id", async (req, res, next) => {
+  try {
+    
+  } catch (error) {
+    
+  }
+})
 
 module.exports = apiRouter;
