@@ -141,7 +141,6 @@ async function attachTagsToLink(allLinks) {
 
   return allLinks;
 }
-//function that joins links and tags and adds tags to said link
 
 // export
 module.exports = {
