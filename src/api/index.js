@@ -49,7 +49,6 @@ export async function createLink({ url, comment, tags = [] }) {
     throw error;
   }
 }
-<<<<<<< HEAD
 
 export async function deleteLink(id) {
   try {
@@ -58,5 +57,3 @@ export async function deleteLink(id) {
     
   }
 }
-=======
->>>>>>> 5b5ff0d702bf44b86fdddadb54ee723359c917b1
