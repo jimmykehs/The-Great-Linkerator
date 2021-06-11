@@ -4,7 +4,7 @@ import "./Title.css";
 const Title = () => {
   return (
     <div className="Title-Container">
-      <h1>Linkerator</h1>
+      <h1>Linkerator The 'Great'</h1>
     </div>
   );
 };
