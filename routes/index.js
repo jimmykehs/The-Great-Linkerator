@@ -69,7 +69,7 @@ apiRouter.post("/links", async (req, res, next) => {
     linkData.url = url,
     linkData.count = count,
     linkData.comment = comment
-    const newLink = await createLinkTag(linkData)
+    const newLink = await createLinkTags(linkData) //add 's' to Tags
 
     if (newLink) {
       res.send(newLink)
@@ -97,6 +97,10 @@ apiRouter.patch("/links/:id", async (req, res, next) => {
 
   if (url) {
     updateFields.url = url
+  }
+
+  if (count) {
+    updateFields.count = count
   }
 
   if (comment) {
