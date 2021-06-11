@@ -52,7 +52,7 @@ export async function createLink({ url, comment, tags = [] }) {
 
 export async function deleteLink(id) {
   try {
-    const { data } = await axios.delete(`${ }/links/${id}`)
+    const { data } = await axios.delete(`api/links/${id}`)
   } catch (error) {
     
   }
