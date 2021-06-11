@@ -49,14 +49,9 @@ export async function createLink({ url, comment, tags = [] }) {
     throw error;
   }
 }
-<<<<<<< HEAD
 
 export async function deleteLink(id) {
   try {
-    const { data } = await axios.delete(`${ }/links/${id}`)
-  } catch (error) {
-    
-  }
+    const { data } = await axios.delete(`${""}/links/${id}`);
+  } catch (error) {}
 }
-=======
->>>>>>> 5b5ff0d702bf44b86fdddadb54ee723359c917b1

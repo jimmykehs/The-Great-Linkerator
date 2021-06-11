@@ -22,7 +22,7 @@ const BookmarkRow = ({ bookmark }) => {
       <td>{link_comment}</td>
       <td>{link_view_count}</td>
       <td>{creationdt}</td>
-      <td></td> {/* Tags */}
+      <td></td>
     </tr>
   );
 };
