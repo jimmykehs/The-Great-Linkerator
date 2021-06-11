@@ -1,9 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import BookmarkRow from "../BookmarkRow/BookmarkRow.js";
 
 import "./Results.css";
 
-const Results = ({ searchResults }) => {
+const Results = () => {
+  const [searchResults] = useState([])
+
   return (
     <div className="Results">
       <table className="Results-Table">

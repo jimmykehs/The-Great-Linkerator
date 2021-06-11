@@ -72,7 +72,7 @@ apiRouter.post("/links", async (req, res, next) => {
     const newLink = await createLinkTags(linkData)
 
     if (newLink) {
-      res.send(newLink)
+      res.send({ newLink })
     } else {
       next({
         name: 'Create Link Error',
