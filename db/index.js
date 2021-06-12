@@ -66,11 +66,11 @@ async function getAllTags() {
     const { rows } = await client.query(`
     SELECT *
     FROM tags;
-    `)
-    console.log(rows, "TAGS***")
-    return rows
+    `);
+    console.log(rows, "TAGS***");
+    return rows;
   } catch (error) {
-    throw error 
+    throw error;
   }
 }
 
@@ -135,14 +135,14 @@ async function attachTagsToLink(allLinks) {
 
   const { rows: tags } = await client.query(
     `
-    SELECT tags.*, link_tags.*
+    SELECT tags.tag_content, link_tags.*
     FROM tags
-    JOIN link_tags ON tags.ID = link_tags."linkId"
+    JOIN link_tags ON tags.ID = link_tags."tagId"
     WHERE link_tags."linkId" IN (${inString});
     `,
     linkIds
   );
-
+  console.log(tags);
   allLinks.forEach((link) => {
     link.tags = [];
     tags.forEach((tag) => {
@@ -166,5 +166,5 @@ module.exports = {
   createLinkTag,
   updateClickCount,
   getAllLinksWithTags,
-  attachTagsToLink
+  attachTagsToLink,
 };
