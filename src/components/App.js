@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { BookmarkCard, SearchBar, Title, Results, CreateNewLink } from "./index";
+import { BookmarkCard, SearchBar, Title, Results } from "./index";
 import { getLinks } from "../api";
 
 import "./App.css";
@@ -11,10 +11,10 @@ const App = () => {
 
   useEffect(() => {
     async function fetchBookmarks() {
-      const allLinks = await getLinks();
-      // console.log(allLinks);
-      setAllBookmarks(allLinks);
-      setSearchResults(allLinks);
+      const { links } = await getLinks();
+      console.log(links);
+      setAllBookmarks(links);
+      setSearchResults(links);
     }
 
     fetchBookmarks();
@@ -27,9 +27,7 @@ const App = () => {
         setSearchResults={setSearchResults}
         searchResults={searchResults}
       />
-      <CreateNewLink 
-
-      />
+   
       <Results 
         searchResults={searchResults} />
     </div>

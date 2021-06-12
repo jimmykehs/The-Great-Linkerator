@@ -5,6 +5,7 @@ const {
   createLink,
   createTags,
   createLinkTag,
+  getAllTags,
   getAllLinkTagsWithTags,
 } = require("./index");
 
@@ -60,7 +61,7 @@ async function populateInitialData() {
       link_name: "Netflix",
       link_url: "https://www.netflix.com/",
       link_image_id: null,
-      link_view_count: null,
+      link_view_count: 0,
       link_comment: "Netflix is really overpriced these days",
     });
     await createLink({
@@ -68,14 +69,14 @@ async function populateInitialData() {
       link_url:
         "https://www.hulu.com/welcome?orig_referrer=https%3A%2F%2Fwww.bing.com%2F",
       link_image_id: null,
-      link_view_count: null,
+      link_view_count: 0,
       link_comment: "Hulu has way better content then Netflix",
     });
     await createLink({
       link_name: "Reverb",
       link_url: "https://reverb.com/",
       link_image_id: null,
-      link_view_count: null,
+      link_view_count: 0,
       link_comment: "I have no idea what this is but Nick does",
     });
     console.log("Finished creating links");
@@ -104,6 +105,7 @@ async function populateInitialData() {
     console.log("Finsihed attaching tags to link!");
 
     console.log(allLinks);
+    await getAllTags()
     console.log("rebuild finished!");
   } catch (error) {
     throw error;

@@ -61,6 +61,19 @@ async function getAllLinks() {
   }
 }
 
+async function getAllTags() {
+  try {
+    const { rows } = await client.query(`
+    SELECT *
+    FROM tags;
+    `)
+    console.log(rows, "TAGS***")
+    return rows
+  } catch (error) {
+    throw error 
+  }
+}
+
 async function getAllLinkTags() {
   try {
     const { rows } = await client.query(`
@@ -148,6 +161,7 @@ module.exports = {
   createLink,
   createTags,
   getAllLinks,
+  getAllTags,
   getAllLinkTags,
   createLinkTag,
   updateClickCount,

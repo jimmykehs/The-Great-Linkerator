@@ -5,6 +5,7 @@ const {
   createLink,
   //createTags,
   getAllLinks,
+  getAllTags,
   getAllLinkTags,
   createLinkTag,
   //updateClickCount,
@@ -27,11 +28,11 @@ apiRouter.get("/links", async (req, res, next) => {
 })
 
 
-//getAllLinkTags
+//getAllTags
 apiRouter.get("/tags", async (req, res, next) => {
   try {
-    const tags = getAllLinkTags()
-
+    const tags = await getAllTags()
+    console.log(tags)
     res.send({ 
       tags
     })
@@ -44,10 +45,10 @@ apiRouter.get("/tags", async (req, res, next) => {
 
 
 //getAllLinkTagsWithTags
-apiRouter.get("/:tagName/links", async (req, res, next) => {
+apiRouter.get("/links/:tagName", async (req, res, next) => {
   const { tagName } = req.params
   try {
-    const links = await getAllLinkTagsWithTags(tagName)
+    const linkTags = await getAllLinkTagsWithTags(tagName)
   } catch (error) {
     
   }
