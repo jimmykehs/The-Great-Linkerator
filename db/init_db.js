@@ -101,7 +101,7 @@ async function populateInitialData() {
     console.log("Finished creating link tags");
 
     console.log("Attaching tags to link!");
-    const allLinks = await getAllLinkTagsWithTags();
+    const allLinks = await getAllLinksWithTags();
     console.log("Finsihed attaching tags to link!");
 
     console.log(allLinks);

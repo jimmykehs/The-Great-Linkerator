@@ -20,7 +20,7 @@ export async function getLinks() {
 
 export async function getTags() {
   try {
-    const {data} = await axios.get(`/api/tags`);
+    const { data } = await axios.get(`/api/tags`);
     console.log(data, "TAGS");
     return data;
   } catch (error) {
@@ -31,12 +31,14 @@ export async function getTags() {
 //
 export async function getLinksById(id) {
   try {
-    const { data } = await axios.get(`/api/links${id}`);
+    const { data } = await axios.get(`/api/links/:id`);
     console.log(data, "LINK**ID");
+    return data;
   } catch (error) {
     throw error;
   }
 }
+
 
 export async function createLink(url, comment, tags) {
   try {
@@ -54,10 +56,6 @@ export async function createLink(url, comment, tags) {
 
 export async function deleteLink(id) {
   try {
-<<<<<<< HEAD
-    const { data } = await axios.delete(`/links/${id}`);
-=======
     const { data } = await axios.delete(`api/links/${id}`);
->>>>>>> deeb2028352c86094e137dff8385384e4b1e5043
   } catch (error) {}
 }

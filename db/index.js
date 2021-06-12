@@ -86,7 +86,7 @@ async function getAllLinkTags() {
   }
 }
 
-async function getAllLinkTagsWithTags() {
+async function getAllLinksWithTags() {
   try {
     const { rows } = await client.query(`
     SELECT *
@@ -165,5 +165,6 @@ module.exports = {
   getAllLinkTags,
   createLinkTag,
   updateClickCount,
-  getAllLinkTagsWithTags,
+  getAllLinksWithTags,
+  attachTagsToLink
 };
