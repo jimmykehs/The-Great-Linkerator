@@ -1,14 +1,23 @@
 import React from "react";
 import "./SearchBar.css";
 import Modal from "react-modal";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { TextField } from "@material-ui/core";
 
-const SearchBar = ({ setSearchResults, searchResults }) => {
+const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
   const [newBookmark, setnewBookmark] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
   const [name, setName] = useState();
   const [url, setUrl] = useState();
   const [tag, setTag] = useState();
   const [comment, setComment] = useState();
+
+  useEffect(() => {
+    let results = allBookmarks.filter((result) =>
+      result.link_name.toLowerCase().startsWith(searchTerm.toLowerCase())
+    );
+    setSearchResults(results);
+  }, [searchTerm]);
 
   const addBookmark = async () => {
     try {
@@ -53,10 +62,14 @@ const SearchBar = ({ setSearchResults, searchResults }) => {
   return (
     <>
       <div className="Search-Container">
-        <input
-          className="Search-Bar"
-          type="text"
-          placeholder="Search sites or tags"
+        <TextField
+          id="Search-Bar"
+          label="Search for links"
+          variant="outlined"
+          value={searchTerm}
+          onChange={(event) => {
+            setSearchTerm(event.target.value);
+          }}
         />
         <select
           className="Sort-Select"
