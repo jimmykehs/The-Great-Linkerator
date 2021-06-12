@@ -57,7 +57,7 @@ apiRouter.get("/:tagName/links", async (req, res, next) => {
 
 //CreateLinkTag
 apiRouter.post("/links", async (req, res, next) => {
-  const { url, count, comment = '' } = req.body
+  const { url, comment, tags = [] } = req.body
   const tagArr = tags.trim().split(/\s+/)
   const linkData = {}
 
@@ -67,8 +67,10 @@ apiRouter.post("/links", async (req, res, next) => {
 
   try {
     linkData.url = url,
-    linkData.count = count,
     linkData.comment = comment
+    linkData.count = count,
+    linkData.tags = tags
+    
     const newLink = await createLinkTags(linkData)
 
     if (newLink) {
