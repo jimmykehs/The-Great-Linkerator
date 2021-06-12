@@ -11,10 +11,10 @@ const App = () => {
 
   useEffect(() => {
     async function fetchBookmarks() {
-      const allLinks = await getLinks();
-      console.log(allLinks);
-      setAllBookmarks(allLinks);
-      setSearchResults(allLinks);
+      const { links } = await getLinks();
+      console.log(links);
+      setAllBookmarks(links);
+      setSearchResults(links);
     }
 
     fetchBookmarks();
