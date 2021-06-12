@@ -5,20 +5,19 @@ import { useState } from "react";
 
 const SearchBar = ({ setSearchResults, searchResults }) => {
   const [newBookmark, setnewBookmark] = useState(false);
-  const [closeForm, setcloseForm] = useState(false);
   const [name, setName] = useState();
   const [url, setUrl] = useState();
   const [tag, setTag] = useState();
   const [comment, setComment] = useState();
 
-  const addBookmark = async (link_name, link_url, link_comment) => {
+  const addBookmark = async () => {
     try {
       const response = await fetch(`/links`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ link_name, link_url, link_comment }),
+        body: JSON.stringify({ name, url, comment, tag }),
       });
       const data = await response.json();
       console.log(data);
