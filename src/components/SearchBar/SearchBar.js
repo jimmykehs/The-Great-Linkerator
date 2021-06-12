@@ -45,6 +45,8 @@ const SearchBar = ({ setSearchResults, searchResults }) => {
         );
         setSearchResults(decreasingResults);
         break;
+      default:
+        break;
     }
   }
 
