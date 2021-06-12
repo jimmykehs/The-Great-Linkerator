@@ -20,7 +20,7 @@ export async function getLinks() {
 
 export async function getTags() {
   try {
-    const { data } = await axios.get(`${""}/tags`);
+    const { data } = await axios.get(`/api/tags`);
     console.log(data, "TAGS");
     return data.tags;
   } catch (error) {
@@ -30,7 +30,7 @@ export async function getTags() {
 
 export async function getLinksById(id) {
   try {
-    const { data } = await axios.get(`${""}/links${id}`);
+    const { data } = await axios.get(`api/links${id}`);
     console.log(data, "LINK**ID");
   } catch (error) {
     throw error;
@@ -39,7 +39,7 @@ export async function getLinksById(id) {
 
 export async function createLink({ url, comment, tags = [] }) {
   try {
-    const { data } = await axios.post(`${""}/links`, {
+    const { data } = await axios.post(`api/links`, {
       url: `${url}`,
       comment: `${comment}`,
       tags: `${tags}`,
@@ -52,6 +52,6 @@ export async function createLink({ url, comment, tags = [] }) {
 
 export async function deleteLink(id) {
   try {
-    const { data } = await axios.delete(`${""}/links/${id}`);
+    const { data } = await axios.delete(`api/links/${id}`);
   } catch (error) {}
 }

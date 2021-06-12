@@ -1,11 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 import BookmarkRow from "../BookmarkRow/BookmarkRow.js";
-
 import "./Results.css";
+import { Paper, TableContainer } from '@material-ui/core'
 
-const Results = ({ searchResults }) => {
+const Results = () => {
+  const [searchResults, setSearchResults] = useState([])
+
   return (
     <div className="Results">
+     <TableContainer component={Paper}>
       <table className="Results-Table">
         <thead>
           <tr className="Result-Headers">
@@ -23,6 +26,7 @@ const Results = ({ searchResults }) => {
           })}
         </tbody>
       </table>
+     </TableContainer>
     </div>
   );
 };
