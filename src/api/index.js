@@ -32,20 +32,20 @@ export async function getTags() {
 export async function getLinksById(id) {
   try {
     const { data } = await axios.get(`/api/links/:id`);
-    console.log(data, "LINK**ID");
+    console.log(data, "LINK*ID");
     return data;
   } catch (error) {
     throw error;
   }
 }
 
-
-export async function createLink(url, comment, tags) {
+//NEEDS WORK
+export async function createLink({ url, comment, tags }) {
   try {
     const data = await axios.post(`/api/links`, {
-      url: url,
-      comment: comment,
-      tags: tags,
+      url: `${url}`,
+      comment: `${comment}`,
+      tags: `${tags}`,
     });
     console.log(data, "data**")
     return data;
@@ -54,8 +54,8 @@ export async function createLink(url, comment, tags) {
   }
 }
 
-export async function deleteLink(id) {
-  try {
-    const { data } = await axios.delete(`api/links/${id}`);
-  } catch (error) {}
-}
+// export async function deleteLink(id) {
+//   try {
+//     const { data } = await axios.delete(`api/links/${id}`);
+//   } catch (error) {}
+// }

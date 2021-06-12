@@ -57,9 +57,9 @@ apiRouter.get("/tags", async (req, res, next) => {
 
 
 
-//CreateLinkTag
+//CreateLinkTag ***NEEDS WORK 500 ERROR***
 apiRouter.post("/links", async (req, res, next) => {
-  const { link_url, link_comment, link_view_count, link_tags = [] } = req.body
+  const { url, comment, count, tags = [] } = req.body
   const tagArr = tags.trim().split(/\s+/)
   const linkData = {}
 
@@ -68,12 +68,12 @@ apiRouter.post("/links", async (req, res, next) => {
   }
 
   try {
-    linkData.url = { link_url },
-    linkData.comment = { link_comment },
-    linkData.count = { link_view_count },
-    linkData.tags = { link_tags }
+    linkData.link_url = { url },
+    linkData.link_comment = { comment },
+    linkData.link_view_count = { count },
+    linkData.link_tags = { tags }
     
-    const newLink = await createLinkTags(linkData)
+    const newLink = await createLinkTag(linkData)
 
     if (newLink) {
       res.send({ newLink })
