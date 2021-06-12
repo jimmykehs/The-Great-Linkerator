@@ -9,14 +9,15 @@ const {
   getAllLinkTags,
   createLinkTag,
   //updateClickCount,
-  getAllLinkTagsWithTags,
+  getAllLinksWithTags,
+  attachTagsToLink
 } = require ('../db')
 
 
 //getAllLinks
 apiRouter.get("/links", async (req, res, next) => {
   try {
-    const links = await getAllLinks()
+    const links = await getAllLinksWithTags()
 
     res.send({
       links
@@ -44,21 +45,21 @@ apiRouter.get("/tags", async (req, res, next) => {
 
 
 
-//getAllLinkTagsWithTags
-apiRouter.get("/links/:tagName", async (req, res, next) => {
-  const { tagName } = req.params
-  try {
-    const linkTags = await getAllLinkTagsWithTags(tagName)
-  } catch (error) {
+// //getAllLinkTagsWithTags
+// apiRouter.get("/links/:tagName", async (req, res, next) => {
+//   const { tagName } = req.params
+//   try {
+//     const linkTags = await getAllLinksWithTags(tagName)
+//   } catch (error) {
     
-  }
-})
+//   }
+// })
 
 
 
 //CreateLinkTag
 apiRouter.post("/links", async (req, res, next) => {
-  const { url, comment, tags = [] } = req.body
+  const { link_url, link_comment, link_view_count, link_tags = [] } = req.body
   const tagArr = tags.trim().split(/\s+/)
   const linkData = {}
 
@@ -67,10 +68,10 @@ apiRouter.post("/links", async (req, res, next) => {
   }
 
   try {
-    linkData.url = url,
-    linkData.comment = comment
-    linkData.count = count,
-    linkData.tags = tags
+    linkData.url = { link_url },
+    linkData.comment = { link_comment },
+    linkData.count = { link_view_count },
+    linkData.tags = { link_tags }
     
     const newLink = await createLinkTags(linkData)
 
