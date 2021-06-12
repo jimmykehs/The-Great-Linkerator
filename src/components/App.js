@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { BookmarkCard, SearchBar, Title, Results } from "./index";
+import { SearchBar, Title, Results } from "./index";
 import { getLinks } from "../api";
 
 import "./App.css";
@@ -24,12 +24,12 @@ const App = () => {
     <div className="App">
       <Title />
       <SearchBar
+        allBookmarks={allBookmarks}
         setSearchResults={setSearchResults}
         searchResults={searchResults}
       />
-   
-      <Results 
-        searchResults={searchResults} />
+
+      <Results searchResults={searchResults} />
     </div>
   );
 };

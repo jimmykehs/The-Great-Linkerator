@@ -62,7 +62,7 @@ async function populateInitialData() {
       link_name: "Netflix",
       link_url: "https://www.netflix.com/",
       link_image_id: null,
-      link_view_count: 0,
+      link_view_count: 100,
       link_comment: "Netflix is really overpriced these days",
     });
     await createLink({
@@ -70,15 +70,22 @@ async function populateInitialData() {
       link_url:
         "https://www.hulu.com/welcome?orig_referrer=https%3A%2F%2Fwww.bing.com%2F",
       link_image_id: null,
-      link_view_count: 0,
+      link_view_count: 10,
       link_comment: "Hulu has way better content then Netflix",
     });
     await createLink({
       link_name: "Reverb",
       link_url: "https://reverb.com/",
       link_image_id: null,
-      link_view_count: 0,
+      link_view_count: 30,
       link_comment: "I have no idea what this is but Nick does",
+    });
+    await createLink({
+      link_name: "Netflix 2",
+      link_url: "",
+      link_image_id: null,
+      link_view_count: 300,
+      link_comment: "Netflix but better",
     });
     console.log("Finished creating links");
 

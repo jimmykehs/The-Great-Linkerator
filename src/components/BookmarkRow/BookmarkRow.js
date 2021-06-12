@@ -16,7 +16,12 @@ const BookmarkRow = ({ bookmark }) => {
   return (
     <TableRow>
       <TableCell>
-        <a href={link_url} target="_blank" className="Link">
+        <a
+          href={link_url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="Link"
+        >
           {link_name}
         </a>
       </TableCell>
