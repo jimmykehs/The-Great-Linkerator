@@ -5,6 +5,7 @@ const {
   createLink,
   //createTags,
   getAllLinks,
+  getAllTags,
   getAllLinkTags,
   createLinkTag,
   //updateClickCount,
@@ -27,11 +28,11 @@ apiRouter.get("/links", async (req, res, next) => {
 })
 
 
-//getAllLinkTags
+//getAllTags
 apiRouter.get("/tags", async (req, res, next) => {
   try {
-    const tags = getAllLinkTags()
-
+    const tags = await getAllTags()
+    console.log(tags)
     res.send({ 
       tags
     })
@@ -44,10 +45,10 @@ apiRouter.get("/tags", async (req, res, next) => {
 
 
 //getAllLinkTagsWithTags
-apiRouter.get("/:tagName/links", async (req, res, next) => {
+apiRouter.get("/links/:tagName", async (req, res, next) => {
   const { tagName } = req.params
   try {
-    const links = await getAllLinkTagsWithTags(tagName)
+    const linkTags = await getAllLinkTagsWithTags(tagName)
   } catch (error) {
     
   }
@@ -57,7 +58,7 @@ apiRouter.get("/:tagName/links", async (req, res, next) => {
 
 //CreateLinkTag
 apiRouter.post("/links", async (req, res, next) => {
-  const { url, count, comment = '' } = req.body
+  const { url, comment, tags = [] } = req.body
   const tagArr = tags.trim().split(/\s+/)
   const linkData = {}
 
@@ -67,8 +68,10 @@ apiRouter.post("/links", async (req, res, next) => {
 
   try {
     linkData.url = url,
-    linkData.count = count,
     linkData.comment = comment
+    linkData.count = count,
+    linkData.tags = tags
+    
     const newLink = await createLinkTags(linkData)
 
     if (newLink) {

@@ -27,7 +27,9 @@ const App = () => {
         setSearchResults={setSearchResults}
         searchResults={searchResults}
       />
-      <Results searchResults={searchResults} />
+   
+      <Results 
+        searchResults={searchResults} />
     </div>
   );
 };

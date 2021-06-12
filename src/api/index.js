@@ -20,30 +20,32 @@ export async function getLinks() {
 
 export async function getTags() {
   try {
-    const { data } = await axios.get(`/api/tags`);
+    const {data} = await axios.get(`/api/tags`);
     console.log(data, "TAGS");
-    return data.tags;
+    return data;
   } catch (error) {
     throw error;
   }
 }
 
+//
 export async function getLinksById(id) {
   try {
-    const { data } = await axios.get(`api/links${id}`);
+    const { data } = await axios.get(`/api/links${id}`);
     console.log(data, "LINK**ID");
   } catch (error) {
     throw error;
   }
 }
 
-export async function createLink({ url, comment, tags = [] }) {
+export async function createLink(url, comment, tags) {
   try {
-    const { data } = await axios.post(`api/links`, {
-      url: `${url}`,
-      comment: `${comment}`,
-      tags: `${tags}`,
+    const data = await axios.post(`/api/links`, {
+      url: url,
+      comment: comment,
+      tags: tags,
     });
+    console.log(data, "data**")
     return data;
   } catch (error) {
     throw error;
