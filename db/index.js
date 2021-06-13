@@ -67,7 +67,7 @@ async function getAllTags() {
     SELECT *
     FROM tags;
     `);
-    console.log(rows, "TAGS***");
+    console.log(rows);
     return rows;
   } catch (error) {
     throw error;
