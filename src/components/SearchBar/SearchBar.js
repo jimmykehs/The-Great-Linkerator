@@ -3,14 +3,16 @@ import "./SearchBar.css";
 import Modal from "react-modal";
 import { useState, useEffect } from "react";
 import { TextField } from "@material-ui/core";
+import { createLink } from '../../api'
 
 const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
   const [newBookmark, setnewBookmark] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [name, setName] = useState();
   const [url, setUrl] = useState();
-  const [tag, setTag] = useState();
+  const [tags, setTags] = useState([]);
   const [comment, setComment] = useState();
+  
 
   useEffect(() => {
     let results = allBookmarks.filter((result) =>
@@ -21,12 +23,12 @@ const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
 
   const addBookmark = async () => {
     try {
-      const response = await fetch(`/links`, {
+      const response = await fetch(`/api/links/post`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, url, comment, tag }),
+        body: JSON.stringify({ name, url, comment, tags }),
       });
       const data = await response.json();
       console.log(data);
@@ -124,7 +126,7 @@ const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
               type="text"
               placeholder="Tags"
               id="bookmark-tags"
-              onInput={(event) => setTag(event.target.value)}
+              onInput={(event) => setTags(event.target.value)}
             />
             <input
               type="text"

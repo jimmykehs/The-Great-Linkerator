@@ -14,6 +14,8 @@ const {
 } = require ('../db')
 
 
+
+
 //getAllLinks
 apiRouter.get("/links", async (req, res, next) => {
   try {
@@ -32,7 +34,7 @@ apiRouter.get("/links", async (req, res, next) => {
 //getAllTags
 apiRouter.get("/tags", async (req, res, next) => {
   try {
-    const tags = await getAllTags()
+    const tags = await attachTagsToLink()
     console.log(tags)
     res.send({ 
       tags
@@ -44,22 +46,9 @@ apiRouter.get("/tags", async (req, res, next) => {
 })
 
 
-
-// //getAllLinkTagsWithTags
-// apiRouter.get("/links/:tagName", async (req, res, next) => {
-//   const { tagName } = req.params
-//   try {
-//     const linkTags = await getAllLinksWithTags(tagName)
-//   } catch (error) {
-    
-//   }
-// })
-
-
-
-//CreateLinkTag ***NEEDS WORK 500 ERROR***
-apiRouter.post("/links", async (req, res, next) => {
-  const { url, comment, count, tags = [] } = req.body
+//CreateLinkTag         ***NEEDS WORK 500 ERROR***
+apiRouter.post("/links/post", async (req, res, next) => {
+  const { name, url, comment, tags } = req.body
   const tagArr = tags.trim().split(/\s+/)
   const linkData = {}
 
@@ -68,15 +57,15 @@ apiRouter.post("/links", async (req, res, next) => {
   }
 
   try {
-    linkData.link_url = { url },
-    linkData.link_comment = { comment },
-    linkData.link_view_count = { count },
-    linkData.link_tags = { tags }
+    linkData.link_name = name ,
+    linkData.link_url = url,
+    linkData.link_comment = comment,
+    linkData.link_tags = tags
     
-    const newLink = await createLinkTag(linkData)
+    const newLink = await createLink(linkData)
 
     if (newLink) {
-      res.send({ newLink })
+      res.send({ linkData })
     } else {
       next({
         name: 'Create Link Error',
@@ -92,7 +81,7 @@ apiRouter.post("/links", async (req, res, next) => {
 
 apiRouter.patch("/links/:id", async (req, res, next) => {
   const { id } = req.params
-  const { url, count, comment } = req.body
+  const { url, comment, tags } = req.body
   const updateFields = {}
 
   if (tags && tags.length > 0) {
@@ -103,18 +92,18 @@ apiRouter.patch("/links/:id", async (req, res, next) => {
     updateFields.url = url
   }
 
-  if (count) {
-    updateFields.count = count
+  if (tags) {
+    updateFields.comment = comment
   }
 
   if (comment) {
-    updateFields.comment = comment
+    updateFields.tags = tags
   }
 
   try {
     const updatedLink = await updateLink(id, updateFields)
     if (updatedLink) {
-      res.send({link: updatedLink})
+      res.send({ link: updatedLink })
     } else {
       next({
         name: 'Link update Fail',
@@ -138,3 +127,15 @@ apiRouter.patch("/tags", async (req, res, next) => {
 })
 
 module.exports = apiRouter;
+
+
+
+// //getAllLinkTagsWithTags
+// apiRouter.get("/links/:tagName", async (req, res, next) => {
+//   const { tagName } = req.params
+//   try {
+//     const linkTags = await getAllLinksWithTags(tagName)
+//   } catch (error) {
+    
+//   }
+// })
