@@ -8,7 +8,7 @@ const {
   getAllTags,
   getAllLinkTags,
   createLinkTag,
-  //updateClickCount,
+  updateClickCount,
   getAllLinksWithTags,
   attachTagsToLink
 } = require ('../db')
@@ -80,28 +80,13 @@ apiRouter.post("/links/post", async (req, res, next) => {
 
 
 apiRouter.patch("/links/:id", async (req, res, next) => {
+  console.log("In the correct route")
   const { id } = req.params
-  const { url, comment, tags } = req.body
-  const updateFields = {}
-
-  if (tags && tags.length > 0) {
-    updateFields.tags = tags.trim().split(/\s+/)
-  }
-
-  if (url) {
-    updateFields.url = url
-  }
-
-  if (tags) {
-    updateFields.comment = comment
-  }
-
-  if (comment) {
-    updateFields.tags = tags
-  }
+  const { count } = req.body
 
   try {
-    const updatedLink = await updateLink(id, updateFields)
+    const updatedLink = await updateClickCount(id, count)
+    console.log(updatedLink, "Here lies the updated link")
     if (updatedLink) {
       res.send({ link: updatedLink })
     } else {
@@ -128,6 +113,13 @@ apiRouter.patch("/tags", async (req, res, next) => {
 
 module.exports = apiRouter;
 
+// apiRouter.patch("/links/count", async (req, res, next) => {
+//   try {
+    
+//   } catch ({name, messages}) {
+//       next({next, messages})
+//   }
+// })
 
 
 // //getAllLinkTagsWithTags

@@ -1,6 +1,7 @@
 // Connect to DB
 const { Client } = require("pg");
-const DB_NAME = "linkeratordb";
+const DB_NAME = "linkeratorDB";
+//change back to lowercase db
 const DB_URL = process.env.DATABASE_URL || `https://localhost:5432/${DB_NAME}`;
 const client = new Client(DB_URL);
 
@@ -9,7 +10,7 @@ async function createLink({
   link_name,
   link_url,
   link_image_id,
-  link_view_count,
+  link_view_count = 0,
   link_comment,
 }) {
   try {
@@ -116,14 +117,17 @@ async function createLinkTag(linkId, tagId) {
 
 async function updateClickCount(linkId, count) {
   try {
-    await client.query(
+    console.log(linkId, count)
+    const {rows} = await client.query(
       `
     UPDATE links
     SET link_view_count = $1
     WHERE ID = $2
+    RETURNING *
     `,
       [++count, linkId]
     );
+    return rows
   } catch (error) {
     throw error;
   }
