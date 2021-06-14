@@ -57,4 +57,15 @@ export async function createLink({ url, comment, tags }) {
   }
 }
 
-
+export async function updateLink({ id, count }) {
+  try {
+    console.log("starting to update count")
+    const data = await axios.patch(`/api/links/${id}`, {
+      count
+    })
+    console.log("finished updating the count")    
+    return data;
+  } catch (error) {
+    throw error
+  }
+}
