@@ -22,6 +22,7 @@ const Results = ({ searchResults }) => {
             <TableCell>Click Count</TableCell>
             <TableCell>Tags</TableCell>
             <TableCell>Creation Date</TableCell>
+            <TableCell>Delete</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
