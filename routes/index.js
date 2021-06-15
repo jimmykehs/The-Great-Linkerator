@@ -53,7 +53,7 @@ apiRouter.post("/links/post", async (req, res, next) => {
   const linkData = {}
 
   if (tagArr.length) {
-    linkData.tags = tagArr
+    linkData.link_tags = tagArr
   }
 
   try {
