@@ -10,10 +10,8 @@ const {
   createLinkTag,
   updateClickCount,
   getAllLinksWithTags,
-  attachTagsToLink
+  // attachTagsToLink
 } = require ('../db')
-
-
 
 
 //getAllLinks
@@ -34,7 +32,7 @@ apiRouter.get("/links", async (req, res, next) => {
 //getAllTags
 apiRouter.get("/tags", async (req, res, next) => {
   try {
-    const tags = await attachTagsToLink()
+    const tags = await getAllTags()
     console.log(tags)
     res.send({ 
       tags
@@ -46,9 +44,11 @@ apiRouter.get("/tags", async (req, res, next) => {
 })
 
 
+
+
 //CreateLinkTag         ***NEEDS WORK 500 ERROR***
 apiRouter.post("/links/post", async (req, res, next) => {
-  const { name, url, comment, tags } = req.body
+  const { name, url, comment, tags = "" } = req.body
   const tagArr = tags.trim().split(/\s+/)
   const linkData = {}
 
@@ -112,6 +112,9 @@ apiRouter.patch("/tags", async (req, res, next) => {
 })
 
 module.exports = apiRouter;
+
+
+
 
 // apiRouter.patch("/links/count", async (req, res, next) => {
 //   try {
