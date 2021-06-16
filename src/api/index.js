@@ -69,6 +69,10 @@ export async function createLink({ url, comment, tags }) {
 
 export async function updateLink({ id, count }) {
   try {
+<<<<<<< HEAD
+    const { data } = await axios.delete(`api/links/${id}`);
+  } catch (error) {}
+=======
     console.log("starting to update count")
     const data = await axios.patch(`/api/links/${id}`, {
       count
@@ -78,4 +82,5 @@ export async function updateLink({ id, count }) {
   } catch (error) {
     throw error
   }
+>>>>>>> 627920561ba9a4afa690872010369181b0934a92
 }

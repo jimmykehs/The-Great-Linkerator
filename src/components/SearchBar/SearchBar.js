@@ -149,7 +149,14 @@ const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
               id="bookmark-comment"
               onInput={(event) => setComment(event.target.value)}
             />
-            <button class="btn" type="submit">
+            <button
+              class="btn"
+              type="submit"
+              onClick={() => {
+                setnewBookmark(false);
+                window.location.reload();
+              }}
+            >
               Add Bookmark
             </button>
           </form>
