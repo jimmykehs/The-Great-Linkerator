@@ -30,7 +30,6 @@ export async function getTags() {
   }
 }
 
-//
 export async function getLinksById(id) {
   try {
     const { data } = await axios.get(`/api/links/:id`);
