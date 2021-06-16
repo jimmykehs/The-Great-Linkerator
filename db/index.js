@@ -5,14 +5,42 @@ const DB_NAME = "linkeratordb";
 const DB_URL = process.env.DATABASE_URL || `https://localhost:5432/${DB_NAME}`;
 const client = new Client(DB_URL);
 
-// database methods
+
+async function getAllLinks() {
+  try {
+    const { rows } = await client.query(`
+    SELECT *
+    FROM links;
+    `);
+    return rows;
+  } catch (error) {
+    throw error;
+  }
+}
+
+
+async function getAllTags() {
+  try {
+    const { rows } = await client.query(`
+    SELECT *
+    FROM tags;
+    `);
+    return rows;
+  } catch (error) {
+    throw error;
+  }
+}
+
+
 async function createLink({
   link_name,
   link_url,
   link_image_id,
   link_view_count = 0,
   link_comment,
+  link_tags = []
 }) {
+
   try {
     const {
       rows: [link],
@@ -32,8 +60,9 @@ async function createLink({
   }
 }
 
+
 //createTags
-async function createTags({ tag_content }) {
+async function createTags(tag_content) {
   try {
     const { rows } = await client.query(
       `
@@ -50,29 +79,6 @@ async function createTags({ tag_content }) {
   }
 }
 
-async function getAllLinks() {
-  try {
-    const { rows } = await client.query(`
-    SELECT *
-    FROM links;
-    `);
-    return rows;
-  } catch (error) {
-    throw error;
-  }
-}
-
-async function getAllTags() {
-  try {
-    const { rows } = await client.query(`
-    SELECT *
-    FROM tags;
-    `);
-    return rows;
-  } catch (error) {
-    throw error;
-  }
-}
 
 async function getAllLinkTags() {
   try {
@@ -86,6 +92,23 @@ async function getAllLinkTags() {
   }
 }
 
+
+async function getTagByContent(tag) {
+  try {
+    const { rows } = await client.query(`
+      SELECT * 
+      FROM tags
+      WHERE tag_content = '${tag}';
+
+    `)
+   
+    return rows
+  } catch (error) {
+    throw error
+  }
+}
+
+
 async function getAllLinksWithTags() {
   try {
     const { rows } = await client.query(`
@@ -98,6 +121,7 @@ async function getAllLinksWithTags() {
     throw error;
   }
 }
+
 
 async function createLinkTag(linkId, tagId) {
   try {
@@ -113,6 +137,7 @@ async function createLinkTag(linkId, tagId) {
     throw error;
   }
 }
+
 
 async function updateClickCount(linkId, count) {
   try {
@@ -131,6 +156,7 @@ async function updateClickCount(linkId, count) {
     throw error;
   }
 }
+
 
 async function attachTagsToLink(allLinks) {
   const linkIds = allLinks.map((link) => link.id);
@@ -170,4 +196,5 @@ module.exports = {
   updateClickCount,
   getAllLinksWithTags,
   attachTagsToLink,
+  getTagByContent
 };

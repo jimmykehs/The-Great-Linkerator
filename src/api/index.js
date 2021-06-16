@@ -51,7 +51,7 @@ export async function getTagsById(id) {
   }
 }
 
-export async function createLink({ url, comment, tags }) {
+export async function createLink({ url, comment, tags = [] }) {
   try {
     const data = await axios.post(`/api/links`, {
       url: `${url}`,
