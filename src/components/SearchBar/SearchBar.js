@@ -42,6 +42,8 @@ const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
       });
       const data = await response.json();
       console.log(data);
+      setnewBookmark(false);
+      window.location.reload();
     } catch (error) {
       console.error("Oops, could not add new bookmark, please try again");
     }
@@ -149,14 +151,7 @@ const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
               id="bookmark-comment"
               onInput={(event) => setComment(event.target.value)}
             />
-            <button
-              class="btn"
-              type="submit"
-              onClick={() => {
-                setnewBookmark(false);
-                window.location.reload();
-              }}
-            >
+            <button class="btn" type="submit" onClick={() => {}}>
               Add Bookmark
             </button>
           </form>
