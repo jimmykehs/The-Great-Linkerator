@@ -35,7 +35,9 @@ async function createLink({
 //createTags
 async function createTags(tag_content) {
   try {
-    const { rows } = await client.query(
+    const {
+      rows: [tag],
+    } = await client.query(
       `
     INSERT INTO tags(tag_content)
     VALUES ($1)
@@ -43,8 +45,7 @@ async function createTags(tag_content) {
     `,
       [tag_content]
     );
-    console.log(rows);
-    return rows;
+    return tag;
   } catch (error) {
     throw error;
   }
@@ -72,6 +73,17 @@ async function getAllTags() {
   } catch (error) {
     throw error;
   }
+}
+
+async function getTagByContent(tag_content) {
+  const {
+    rows: [tag],
+  } = await client.query(`
+  SELECT * FROM tags
+  WHERE tag_content = '${tag_content}';
+  `);
+
+  return tag;
 }
 
 async function getAllLinkTags() {
@@ -116,7 +128,6 @@ async function createLinkTag(linkId, tagId) {
 
 async function updateClickCount(linkId, count) {
   try {
-    console.log(linkId, count);
     const { rows } = await client.query(
       `
     UPDATE links
@@ -145,7 +156,6 @@ async function attachTagsToLink(allLinks) {
     `,
     linkIds
   );
-  console.log(tags);
   allLinks.forEach((link) => {
     link.tags = [];
     tags.forEach((tag) => {
@@ -170,4 +180,5 @@ module.exports = {
   updateClickCount,
   getAllLinksWithTags,
   attachTagsToLink,
+  getTagByContent,
 };

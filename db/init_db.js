@@ -90,15 +90,9 @@ async function populateInitialData() {
     console.log("Finished creating links");
 
     console.log("Creating tags");
-    await createTags({
-      tag_content: "TV/Movies",
-    });
-    await createTags({
-      tag_content: "Sports",
-    });
-    await createTags({
-      tag_content: "Music",
-    });
+    await createTags("TV/Movies");
+    await createTags("Sports");
+    await createTags("Music");
     console.log("Finished creating tags");
 
     console.log("Creating link tags");
