@@ -1,10 +1,8 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { TableRow, TableCell } from "@material-ui/core";
-import axios from "axios";
 import "./BookmarkRow.css";
-import { updateLink } from "../../api"
-//create clickcount 
-
+import { updateLink } from "../../api";
+//create clickcount
 
 const BookmarkRow = ({ bookmark }) => {
   const {
@@ -16,16 +14,15 @@ const BookmarkRow = ({ bookmark }) => {
     creationdt,
     tags,
   } = bookmark;
-  const [count, setCount] = useState(link_view_count)
+  const [count, setCount] = useState(link_view_count);
   const increment = async () => {
-    setCount(count + 1)
+    setCount(count + 1);
     try {
-      console.log(id)
-      await updateLink({id, count})
+      await updateLink({ id, count });
     } catch (error) {
-      throw error
+      throw error;
     }
-  }
+  };
   return (
     <TableRow>
       <TableCell>
