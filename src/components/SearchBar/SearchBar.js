@@ -1,23 +1,34 @@
 import React from "react";
 import "./SearchBar.css";
 import Modal from "react-modal";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { TextField } from "@material-ui/core";
+import { createLink } from '../../api'
 
-const SearchBar = ({ setSearchResults, searchResults }) => {
+const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
   const [newBookmark, setnewBookmark] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
   const [name, setName] = useState();
   const [url, setUrl] = useState();
-  const [tag, setTag] = useState();
+  const [tags, setTags] = useState([]);
   const [comment, setComment] = useState();
+  
+
+  useEffect(() => {
+    let results = allBookmarks.filter((result) =>
+      result.link_name.toLowerCase().startsWith(searchTerm.toLowerCase())
+    );
+    setSearchResults(results);
+  }, [searchTerm]);
 
   const addBookmark = async () => {
     try {
-      const response = await fetch(`/links`, {
+      const response = await fetch(`/api/links/post`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, url, comment, tag }),
+        body: JSON.stringify({ name, url, comment, tags }),
       });
       const data = await response.json();
       console.log(data);
@@ -53,10 +64,14 @@ const SearchBar = ({ setSearchResults, searchResults }) => {
   return (
     <>
       <div className="Search-Container">
-        <input
-          className="Search-Bar"
-          type="text"
-          placeholder="Search sites or tags"
+        <TextField
+          id="Search-Bar"
+          label="Search for links"
+          variant="outlined"
+          value={searchTerm}
+          onChange={(event) => {
+            setSearchTerm(event.target.value);
+          }}
         />
         <select
           className="Sort-Select"
@@ -111,7 +126,7 @@ const SearchBar = ({ setSearchResults, searchResults }) => {
               type="text"
               placeholder="Tags"
               id="bookmark-tags"
-              onInput={(event) => setTag(event.target.value)}
+              onInput={(event) => setTags(event.target.value)}
             />
             <input
               type="text"

@@ -1,35 +1,54 @@
-import React from "react";
+import React, {useState} from "react";
 import { TableRow, TableCell } from "@material-ui/core";
-
+import axios from "axios";
 import "./BookmarkRow.css";
+import { updateLink } from "../../api"
+//create clickcount 
+
 
 const BookmarkRow = ({ bookmark }) => {
-  const { link_name, link_comment, link_view_count, link_url, creationdt } =
-    bookmark;
-
+  const {
+    id,
+    link_name,
+    link_comment,
+    link_view_count,
+    link_url,
+    creationdt,
+    tags,
+  } = bookmark;
+  const [count, setCount] = useState(link_view_count)
+  const increment = async () => {
+    setCount(count + 1)
+    try {
+      console.log(id)
+      await updateLink({id, count})
+    } catch (error) {
+      throw error
+    }
+  }
   return (
     <TableRow>
-      <TableCell>{link_name}</TableCell>
+      <TableCell>
+        <a
+          href={link_url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="Link"
+          onClick={increment}
+        >
+          {link_name}
+        </a>
+      </TableCell>
       <TableCell>{link_comment}</TableCell>
-      <TableCell>{link_view_count}</TableCell>
-      <TableCell>tags</TableCell>
+      <TableCell>{count}</TableCell>
+      <TableCell>
+        {tags.map((tag) => {
+          return <p key={tag.id}>{tag.tag_content}</p>;
+        })}
+      </TableCell>
       <TableCell>{creationdt}</TableCell>
     </TableRow>
   );
-
-  // return (
-  //   <tr className="Bookmark-Row">
-  //     <td>{bookmark.image}</td>
-  //     <td>
-  //       <a className="Bookmark-Link" href={link_url}>
-  //         {link_name}
-  //       </a>
-  //     </td>
-  //     <td>{link_comment}</td>
-  //     <td>{link_view_count}</td>
-  //     <td>{creationDT}</td>
-  //   </tr>
-  // );
 };
 
 export default BookmarkRow;

@@ -1,6 +1,7 @@
 // Connect to DB
 const { Client } = require("pg");
 const DB_NAME = "linkeratordb";
+//change back to lowercase db
 const DB_URL = process.env.DATABASE_URL || `https://localhost:5432/${DB_NAME}`;
 const client = new Client(DB_URL);
 
@@ -9,7 +10,7 @@ async function createLink({
   link_name,
   link_url,
   link_image_id,
-  link_view_count,
+  link_view_count = 0,
   link_comment,
 }) {
   try {
@@ -61,6 +62,19 @@ async function getAllLinks() {
   }
 }
 
+async function getAllTags() {
+  try {
+    const { rows } = await client.query(`
+    SELECT *
+    FROM tags;
+    `);
+    console.log(rows);
+    return rows;
+  } catch (error) {
+    throw error;
+  }
+}
+
 async function getAllLinkTags() {
   try {
     const { rows } = await client.query(`
@@ -73,7 +87,7 @@ async function getAllLinkTags() {
   }
 }
 
-async function getAllLinkTagsWithTags() {
+async function getAllLinksWithTags() {
   try {
     const { rows } = await client.query(`
     SELECT *
@@ -103,14 +117,17 @@ async function createLinkTag(linkId, tagId) {
 
 async function updateClickCount(linkId, count) {
   try {
-    await client.query(
+    console.log(linkId, count)
+    const {rows} = await client.query(
       `
     UPDATE links
     SET link_view_count = $1
     WHERE ID = $2
+    RETURNING *
     `,
       [++count, linkId]
     );
+    return rows
   } catch (error) {
     throw error;
   }
@@ -122,14 +139,14 @@ async function attachTagsToLink(allLinks) {
 
   const { rows: tags } = await client.query(
     `
-    SELECT tags.*, link_tags.*
+    SELECT tags.tag_content, link_tags.*
     FROM tags
-    JOIN link_tags ON tags.ID = link_tags."linkId"
+    JOIN link_tags ON tags.ID = link_tags."tagId"
     WHERE link_tags."linkId" IN (${inString});
     `,
     linkIds
   );
-
+  console.log(tags);
   allLinks.forEach((link) => {
     link.tags = [];
     tags.forEach((tag) => {
@@ -148,8 +165,10 @@ module.exports = {
   createLink,
   createTags,
   getAllLinks,
+  getAllTags,
   getAllLinkTags,
   createLinkTag,
   updateClickCount,
-  getAllLinkTagsWithTags,
+  getAllLinksWithTags,
+  attachTagsToLink,
 };

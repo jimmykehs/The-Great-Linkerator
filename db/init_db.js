@@ -5,7 +5,8 @@ const {
   createLink,
   createTags,
   createLinkTag,
-  getAllLinkTagsWithTags,
+  getAllTags,
+  getAllLinksWithTags,
 } = require("./index");
 
 async function buildTables() {
@@ -42,6 +43,7 @@ async function buildTables() {
           link_image_path BYTEA NULL
       );
       CREATE TABLE link_tags(
+        ID SERIAL PRIMARY KEY,
         "linkId" INT REFERENCES links(ID) NOT NULL,
         "tagId" INT REFERENCES tags(ID) NOT NULL,
         UNIQUE ("linkId", "tagId")
@@ -60,7 +62,7 @@ async function populateInitialData() {
       link_name: "Netflix",
       link_url: "https://www.netflix.com/",
       link_image_id: null,
-      link_view_count: 0,
+      link_view_count: 100,
       link_comment: "Netflix is really overpriced these days",
     });
     await createLink({
@@ -68,15 +70,22 @@ async function populateInitialData() {
       link_url:
         "https://www.hulu.com/welcome?orig_referrer=https%3A%2F%2Fwww.bing.com%2F",
       link_image_id: null,
-      link_view_count: 0,
+      link_view_count: 10,
       link_comment: "Hulu has way better content then Netflix",
     });
     await createLink({
       link_name: "Reverb",
       link_url: "https://reverb.com/",
       link_image_id: null,
-      link_view_count: 0,
+      link_view_count: 30,
       link_comment: "I have no idea what this is but Nick does",
+    });
+    await createLink({
+      link_name: "Netflix 2",
+      link_url: "",
+      link_image_id: null,
+      link_view_count: 300,
+      link_comment: "Netflix but better",
     });
     console.log("Finished creating links");
 
@@ -85,7 +94,7 @@ async function populateInitialData() {
       tag_content: "TV/Movies",
     });
     await createTags({
-      tag_content: "sports",
+      tag_content: "Sports",
     });
     await createTags({
       tag_content: "Music",
@@ -94,16 +103,17 @@ async function populateInitialData() {
 
     console.log("Creating link tags");
     await createLinkTag(1, 1);
-    await createLinkTag(1, 2);
+    await createLinkTag(1, 3);
     await createLinkTag(2, 3);
-    await createLinkTag(3, 2);
+    await createLinkTag(2, 2);
     console.log("Finished creating link tags");
 
     console.log("Attaching tags to link!");
-    const allLinks = await getAllLinkTagsWithTags();
+    const allLinks = await getAllLinksWithTags();
     console.log("Finsihed attaching tags to link!");
 
     console.log(allLinks);
+    await getAllTags();
     console.log("rebuild finished!");
   } catch (error) {
     throw error;
