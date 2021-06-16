@@ -41,21 +41,36 @@ apiRouter.get("/tags", async (req, res, next) => {
 //CreateLinkTag         ***NEEDS WORK 500 ERROR***
 apiRouter.post("/links/post", async (req, res, next) => {
   const { name, url, comment, tags = "" } = req.body;
-  const tagArr = tags.trim().split(",");
-  const linkData = {};
-
-  if (tagArr.length) {
-    linkData.link_tags = tagArr;
-  }
+  const tagsArr = tags.trim().split(",");
 
   try {
-    (linkData.link_name = name),
-      (linkData.link_url = url),
-      (linkData.link_comment = comment),
-      (linkData.link_tags = tags);
+    const linkData = {
+      link_name: name,
+      link_url: url,
+      link_comment: comment,
+    };
 
     const newLink = await createLink(linkData);
-    console.log(tagArr, newLink);
+
+    //Grabs id of Link
+    const linkId = newLink.id;
+    console.log(linkId);
+    console.log(tagsArr);
+
+    // if (tagsArr.length > 0) {
+    //   tagsArr.map(async (tag) => {
+    //     const existingTag = await getTagsByContent(tag);
+
+    //     if (existingTag) {
+    //       console.log("It exists! Here is the ID: ", existingTag.id);
+    //       // createTagLink(linkId, tagId)
+    //     } else {
+    //       const newTag = createTag(tag);
+    //       console.log("Tag was created! Here is the ID for it!:", newTag.id);
+    //       // createTagLink(linkId, tagId)
+    //     }
+    //   });
+    // }
 
     if (newLink) {
       res.send({ linkData });
