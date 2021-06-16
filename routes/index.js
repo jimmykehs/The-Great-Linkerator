@@ -1,7 +1,6 @@
 const apiRouter = require("express").Router();
 
 const {
-  //client,
   createLink,
   //createTags,
   getAllLinks,
@@ -10,8 +9,10 @@ const {
   createLinkTag,
   updateClickCount,
   getAllLinksWithTags,
+  getTagByContent,
   // attachTagsToLink
 } = require("../db");
+
 
 //getAllLinks
 apiRouter.get("/links", async (req, res, next) => {
@@ -26,6 +27,7 @@ apiRouter.get("/links", async (req, res, next) => {
   }
 });
 
+
 //getAllTags
 apiRouter.get("/tags", async (req, res, next) => {
   try {
@@ -37,6 +39,7 @@ apiRouter.get("/tags", async (req, res, next) => {
     next({ name, messages });
   }
 });
+
 
 //CreateLinkTag         ***NEEDS WORK 500 ERROR***
 apiRouter.post("/links/post", async (req, res, next) => {
@@ -54,23 +57,22 @@ apiRouter.post("/links/post", async (req, res, next) => {
 
     //Grabs id of Link
     const linkId = newLink.id;
-    console.log(linkId);
-    console.log(tagsArr);
-
-    // if (tagsArr.length > 0) {
-    //   tagsArr.map(async (tag) => {
-    //     const existingTag = await getTagsByContent(tag);
-
-    //     if (existingTag) {
-    //       console.log("It exists! Here is the ID: ", existingTag.id);
-    //       // createTagLink(linkId, tagId)
-    //     } else {
-    //       const newTag = createTag(tag);
-    //       console.log("Tag was created! Here is the ID for it!:", newTag.id);
-    //       // createTagLink(linkId, tagId)
-    //     }
-    //   });
-    // }
+    
+    if (tagsArr.length > 0) {
+      tagsArr.map(async (tag) => {
+       
+        const existingTag = await getTagByContent(tag);
+        console.log(existingTag)
+        if (existingTag !== undefined) {
+          console.log("It exists! Here is the ID: ", existingTag.id);
+          // createLinkTag(linkId, tagId)
+        } else {
+          const newTag = createTag(tag);
+          console.log("Tag was created! Here is the ID for it!:", newTag.id);
+          // createLinkTag(linkId, tagId)
+        }
+      });
+    }
 
     if (newLink) {
       res.send({ linkData });
@@ -84,6 +86,7 @@ apiRouter.post("/links/post", async (req, res, next) => {
     next({ name, message });
   }
 });
+
 
 apiRouter.patch("/links/:id", async (req, res, next) => {
   console.log("In the correct route");
@@ -105,6 +108,7 @@ apiRouter.patch("/links/:id", async (req, res, next) => {
     next({ name, messages });
   }
 });
+
 
 apiRouter.patch("/tags", async (req, res, next) => {
   try {
