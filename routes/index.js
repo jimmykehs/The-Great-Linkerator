@@ -10,7 +10,6 @@ const {
   updateClickCount,
   getAllLinksWithTags,
   getTagByContent,
-  // attachTagsToLink
 } = require("../db");
 
 //getAllLinks

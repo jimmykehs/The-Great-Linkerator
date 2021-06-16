@@ -33,7 +33,7 @@ const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
 
   const addBookmark = async () => {
     try {
-      const response = await fetch(`/api/links`, {
+      const response = await fetch(`/api/links/post`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

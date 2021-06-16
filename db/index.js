@@ -35,7 +35,6 @@ async function createLink({
   link_image_id,
   link_view_count = 0,
   link_comment,
-  link_tags = [],
 }) {
   try {
     const {
@@ -56,7 +55,6 @@ async function createLink({
   }
 }
 
-//createTags
 async function createTags(tag_content) {
   try {
     const {
@@ -88,14 +86,17 @@ async function getAllLinkTags() {
 }
 
 async function getTagByContent(tag_content) {
-  const {
-    rows: [tag],
-  } = await client.query(`
+  try {
+    const {
+      rows: [tag],
+    } = await client.query(`
   SELECT * FROM tags
   WHERE tag_content = '${tag_content}';
   `);
-
-  return tag;
+    return tag;
+  } catch (error) {
+    throw error;
+  }
 }
 
 async function getAllLinkTags() {
