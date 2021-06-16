@@ -3,7 +3,7 @@ import "./SearchBar.css";
 import Modal from "react-modal";
 import { useState, useEffect } from "react";
 import { TextField } from "@material-ui/core";
-import { createLink } from '../../api'
+import { createLink } from "../../api";
 
 const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
   const [newBookmark, setnewBookmark] = useState(false);
@@ -12,7 +12,7 @@ const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
   const [url, setUrl] = useState();
   const [tags, setTags] = useState([]);
   const [comment, setComment] = useState();
-  
+  const [date, setDate] = useState();
 
   useEffect(() => {
     let results = allBookmarks.filter((result) =>
@@ -31,7 +31,8 @@ const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
         body: JSON.stringify({ name, url, comment, tags }),
       });
       const data = await response.json();
-      console.log(data);
+      setnewBookmark(false);
+      window.location.reload();
     } catch (error) {
       console.error("Oops, could not add new bookmark, please try again");
     }
@@ -134,14 +135,15 @@ const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
               id="bookmark-comment"
               onInput={(event) => setComment(event.target.value)}
             />
-            <button
-              class="btn"
-              type="submit"
-              onClick={() => {
-                setnewBookmark(false);
-                window.location.reload();
-              }}
-            >
+
+            <input
+              type="date"
+              placeholder="Date"
+              id="bookmark-date"
+              onInput={(event) => setDate(event.target.value)}
+              required
+            />
+            <button class="btn" type="submit">
               Add Bookmark
             </button>
           </form>

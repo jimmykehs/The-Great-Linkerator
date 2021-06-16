@@ -13,7 +13,7 @@ export async function getSomething() {
 export async function getLinks() {
   try {
     const { data } = await axios.get(`/api/links`);
-    
+
     return data;
   } catch (error) {
     throw error;
@@ -23,7 +23,7 @@ export async function getLinks() {
 export async function getTags() {
   try {
     const { data } = await axios.get(`/api/tags`);
-    
+
     return data;
   } catch (error) {
     throw error;
@@ -34,7 +34,7 @@ export async function getTags() {
 export async function getLinksById(id) {
   try {
     const { data } = await axios.get(`/api/links/:id`);
-    
+
     return data;
   } catch (error) {
     throw error;
@@ -43,15 +43,13 @@ export async function getLinksById(id) {
 
 export async function getTagsById(id) {
   try {
-    const { data } = await axios.get(`/api/tags/:id`)
+    const { data } = await axios.get(`/api/tags/:id`);
 
-    return data
+    return data;
   } catch (error) {
-    throw error
+    throw error;
   }
 }
-
-
 
 export async function createLink({ url, comment, tags }) {
   try {
@@ -60,7 +58,7 @@ export async function createLink({ url, comment, tags }) {
       comment: `${comment}`,
       tags: `${tags}`,
     });
-   
+
     return data;
   } catch (error) {
     throw error;
@@ -69,18 +67,13 @@ export async function createLink({ url, comment, tags }) {
 
 export async function updateLink({ id, count }) {
   try {
-<<<<<<< HEAD
-    const { data } = await axios.delete(`api/links/${id}`);
-  } catch (error) {}
-=======
-    console.log("starting to update count")
+    console.log("starting to update count");
     const data = await axios.patch(`/api/links/${id}`, {
-      count
-    })
-    console.log("finished updating the count")    
+      count,
+    });
+    console.log("finished updating the count");
     return data;
   } catch (error) {
-    throw error
+    throw error;
   }
->>>>>>> 627920561ba9a4afa690872010369181b0934a92
 }
