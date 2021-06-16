@@ -1,7 +1,6 @@
 const apiRouter = require("express").Router();
 
 const {
-  //client,
   createLink,
   createTags,
   getAllLinks,

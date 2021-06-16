@@ -33,7 +33,7 @@ const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
 
   const addBookmark = async () => {
     try {
-      const response = await fetch(`/api/links/post`, {
+      const response = await fetch(`/api/links`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -87,7 +87,7 @@ const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
         />
         <select>
           {allTags.map((tag) => {
-            return <option>{tag.tag_content}</option>;
+            return <option key={tag.id}>{tag.tag_content}</option>;
           })}
         </select>
         <select

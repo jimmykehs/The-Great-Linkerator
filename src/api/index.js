@@ -51,7 +51,7 @@ export async function getTagsById(id) {
   }
 }
 
-export async function createLink({ url, comment, tags }) {
+export async function createLink({ url, comment, tags = [] }) {
   try {
     const data = await axios.post(`/api/links`, {
       url: `${url}`,
@@ -67,7 +67,7 @@ export async function createLink({ url, comment, tags }) {
 
 export async function updateLink({ id, count }) {
   try {
-    console.log("starting to update count");
+    console.log("starting to update count")
     const data = await axios.patch(`/api/links/${id}`, {
       count,
     });

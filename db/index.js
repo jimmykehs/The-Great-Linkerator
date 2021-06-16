@@ -5,13 +5,37 @@ const DB_NAME = "linkeratordb";
 const DB_URL = process.env.DATABASE_URL || `https://localhost:5432/${DB_NAME}`;
 const client = new Client(DB_URL);
 
-// database methods
+async function getAllLinks() {
+  try {
+    const { rows } = await client.query(`
+    SELECT *
+    FROM links;
+    `);
+    return rows;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getAllTags() {
+  try {
+    const { rows } = await client.query(`
+    SELECT *
+    FROM tags;
+    `);
+    return rows;
+  } catch (error) {
+    throw error;
+  }
+}
+
 async function createLink({
   link_name,
   link_url,
   link_image_id,
   link_view_count = 0,
   link_comment,
+  link_tags = [],
 }) {
   try {
     const {
@@ -51,23 +75,11 @@ async function createTags(tag_content) {
   }
 }
 
-async function getAllLinks() {
+async function getAllLinkTags() {
   try {
     const { rows } = await client.query(`
     SELECT *
-    FROM links;
-    `);
-    return rows;
-  } catch (error) {
-    throw error;
-  }
-}
-
-async function getAllTags() {
-  try {
-    const { rows } = await client.query(`
-    SELECT *
-    FROM tags;
+    FROM link_tags;
     `);
     return rows;
   } catch (error) {
@@ -89,9 +101,12 @@ async function getTagByContent(tag_content) {
 async function getAllLinkTags() {
   try {
     const { rows } = await client.query(`
-    SELECT *
-    FROM link_tags;
+      SELECT * 
+      FROM tags
+      WHERE tag_content = '${tag}';
+
     `);
+
     return rows;
   } catch (error) {
     throw error;
