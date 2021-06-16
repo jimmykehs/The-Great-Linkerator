@@ -68,7 +68,6 @@ async function getAllTags() {
     SELECT *
     FROM tags;
     `);
-    console.log(rows);
     return rows;
   } catch (error) {
     throw error;
@@ -117,8 +116,8 @@ async function createLinkTag(linkId, tagId) {
 
 async function updateClickCount(linkId, count) {
   try {
-    console.log(linkId, count)
-    const {rows} = await client.query(
+    console.log(linkId, count);
+    const { rows } = await client.query(
       `
     UPDATE links
     SET link_view_count = $1
@@ -127,7 +126,7 @@ async function updateClickCount(linkId, count) {
     `,
       [++count, linkId]
     );
-    return rows
+    return rows;
   } catch (error) {
     throw error;
   }

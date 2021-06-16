@@ -3,9 +3,11 @@ import "./SearchBar.css";
 import Modal from "react-modal";
 import { useState, useEffect } from "react";
 import { TextField } from "@material-ui/core";
-import { createLink } from "../../api";
+import { createLink, getTags } from "../../api";
 
 const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
+  const [allTags, setAllTags] = useState([]);
+
   const [newBookmark, setnewBookmark] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [name, setName] = useState();
@@ -13,6 +15,15 @@ const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
   const [tags, setTags] = useState([]);
   const [comment, setComment] = useState();
   const [date, setDate] = useState();
+
+  useEffect(() => {
+    async function getAllTags() {
+      const { tags } = await getTags();
+      setAllTags(tags);
+    }
+
+    getAllTags();
+  }, []);
 
   useEffect(() => {
     let results = allBookmarks.filter((result) =>
@@ -31,6 +42,7 @@ const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
         body: JSON.stringify({ name, url, comment, tags }),
       });
       const data = await response.json();
+      console.log(data);
       setnewBookmark(false);
       window.location.reload();
     } catch (error) {
@@ -74,6 +86,11 @@ const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
             setSearchTerm(event.target.value);
           }}
         />
+        <select>
+          {allTags.map((tag) => {
+            return <option>{tag.tag_content}</option>;
+          })}
+        </select>
         <select
           className="Sort-Select"
           onChange={(event) => {
@@ -143,7 +160,8 @@ const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
               onInput={(event) => setDate(event.target.value)}
               required
             />
-            <button class="btn" type="submit">
+
+            <button class="btn" type="submit" onClick={() => {}}>
               Add Bookmark
             </button>
           </form>
