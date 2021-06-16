@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { TableRow, TableCell } from "@material-ui/core";
+import { Delete as DeleteIcon } from '@material-ui/icons';
 import "./BookmarkRow.css";
 import { updateLink } from "../../api";
-//create clickcount
+
 
 const BookmarkRow = ({ bookmark }) => {
   const {
@@ -14,6 +15,7 @@ const BookmarkRow = ({ bookmark }) => {
     creationdt,
     tags,
   } = bookmark;
+
   const [count, setCount] = useState(link_view_count);
   const increment = async () => {
     setCount(count + 1);
@@ -23,6 +25,26 @@ const BookmarkRow = ({ bookmark }) => {
       throw error;
     }
   };
+
+  const onRemoveLinks = (id) => {
+   
+  }
+
+  const onDelete = (id) => {
+    onRemoveLinks()
+    fetch(`/api/links`, {
+      method: "DELETE", 
+      headers: {
+        "Content-Type": 'application/json',
+      },
+    }).then((response) => response.json())
+      .then((result) => {
+        console.log(result)
+      })
+      .catch(console.error)
+  }
+
+
   return (
     <TableRow>
       <TableCell>
@@ -44,6 +66,13 @@ const BookmarkRow = ({ bookmark }) => {
         })}
       </TableCell>
       <TableCell>{creationdt}</TableCell>
+      <TableCell align="left">
+        <DeleteIcon
+          onClick={() => {
+            onDelete(id);
+          }}
+        />
+      </TableCell>
     </TableRow>
   );
 };

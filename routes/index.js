@@ -37,7 +37,7 @@ apiRouter.get("/tags", async (req, res, next) => {
   }
 });
 
-//CreateLinkTag         ***NEEDS WORK 500 ERROR***
+//CreateLinkTag       
 apiRouter.post("/links/post", async (req, res, next) => {
   const { name, url, comment, tags = "" } = req.body;
   const tagsArr = tags.trim().split(", ");
@@ -107,20 +107,3 @@ apiRouter.patch("/tags", async (req, res, next) => {
 
 module.exports = apiRouter;
 
-// apiRouter.patch("/links/count", async (req, res, next) => {
-//   try {
-
-//   } catch ({name, messages}) {
-//       next({next, messages})
-//   }
-// })
-
-// //getAllLinkTagsWithTags
-// apiRouter.get("/links/:tagName", async (req, res, next) => {
-//   const { tagName } = req.params
-//   try {
-//     const linkTags = await getAllLinksWithTags(tagName)
-//   } catch (error) {
-
-//   }
-// })
