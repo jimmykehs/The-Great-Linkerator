@@ -26,12 +26,10 @@ const BookmarkRow = ({ bookmark }) => {
     }
   };
 
-  const onRemoveLinks = (id) => {
-   
-  }
+
 
   const onDelete = (id) => {
-    onRemoveLinks()
+    
     fetch(`/api/links`, {
       method: "DELETE", 
       headers: {
@@ -68,6 +66,7 @@ const BookmarkRow = ({ bookmark }) => {
       <TableCell>{creationdt}</TableCell>
       <TableCell align="left">
         <DeleteIcon
+          className="Trash"
           onClick={() => {
             onDelete(id);
           }}
