@@ -76,3 +76,13 @@ export async function updateLink({ id, count }) {
     throw error;
   }
 }
+
+
+export async function deleteLink(id) {
+  try {
+    const data = await axios.delete(`/api/links`)
+    return data
+  } catch (error) {
+    throw error
+  }
+}
