@@ -30,7 +30,6 @@ export async function getTags() {
   }
 }
 
-//
 export async function getLinksById(id) {
   try {
     const { data } = await axios.get(`/api/links/:id`);
@@ -75,5 +74,15 @@ export async function updateLink({ id, count }) {
     return data;
   } catch (error) {
     throw error;
+  }
+}
+
+
+export async function deleteLink(id) {
+  try {
+    const data = await axios.delete(`/api/links`)
+    return data
+  } catch (error) {
+    throw error
   }
 }
