@@ -13,9 +13,9 @@ import {
 
 const Results = ({ searchResults }) => {
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} id="table">
       <Table>
-        <TableHead>
+        <TableHead id="grid">
           <TableRow>
             <TableCell>Name</TableCell>
             <TableCell>Comment</TableCell>

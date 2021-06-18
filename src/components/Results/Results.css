@@ -25,3 +25,16 @@ td {
 .Bookmark-Row td {
   text-align: center;
 }
+
+#grid{
+  background: grey;
+}
+
+#table{
+  background: rgba(19, 19, 19, .7);
+  color: white;
+  
+}
+/* #table:hover{
+  transform:scale(1.06);
+} */

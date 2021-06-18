@@ -179,7 +179,7 @@ const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
             />
 
 
-            <button class="btn" type="submit" onClick={() => {}}>
+            <button class="btn" type="submit" onClick={() => {}}></button>
 
             <button className="btn" type="submit" onClick={() => {}}>
 
