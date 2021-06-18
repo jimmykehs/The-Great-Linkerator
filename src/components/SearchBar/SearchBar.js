@@ -115,10 +115,10 @@ const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
         isOpen={newBookmark}
         onRequestClose={() => setnewBookmark(false)}
       >
-        <div class="bookmark-forms">
-          <form class="new-bookmark" onSubmit={addNewBookmark}>
+        <div className="bookmark-forms">
+          <form className="new-bookmark" onSubmit={addNewBookmark}>
             <i
-              class="fa fa-times"
+              className="fa fa-times"
               aria-hidden="true"
               onClick={() => {
                 setnewBookmark(false);
@@ -151,7 +151,7 @@ const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
               id="bookmark-comment"
               onInput={(event) => setComment(event.target.value)}
             />
-            <button class="btn" type="submit" onClick={() => {}}>
+            <button className="btn" type="submit" onClick={() => {}}>
               Add Bookmark
             </button>
           </form>
