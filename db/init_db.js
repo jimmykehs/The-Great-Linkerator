@@ -31,7 +31,7 @@ async function buildTables() {
         link_image_id INT NULL,
         link_view_count INT NULL,
         link_comment varchar(255) NULL,
-        creationDT DATE NOT NULL,
+        creationDT DATE NOT NULL DEFAULT CURRENT_DATE
        );
       CREATE TABLE tags(
           ID SERIAL PRIMARY KEY,	
@@ -47,7 +47,7 @@ async function buildTables() {
         "linkId" INT REFERENCES links(ID) NOT NULL,
         "tagId" INT REFERENCES tags(ID) NOT NULL,
         UNIQUE ("linkId", "tagId")
-      )
+      );
     `);
     console.log("finished creating tables");
   } catch (error) {
@@ -80,13 +80,7 @@ async function populateInitialData() {
       link_view_count: 30,
       link_comment: "I have no idea what this is but Nick does",
     });
-    await createLink({
-      link_name: "Netflix 2",
-      link_url: "",
-      link_image_id: null,
-      link_view_count: 300,
-      link_comment: "Netflix but better",
-    });
+
     console.log("Finished creating links");
 
     console.log("Creating tags");
@@ -97,9 +91,9 @@ async function populateInitialData() {
 
     console.log("Creating link tags");
     await createLinkTag(1, 1);
-    await createLinkTag(1, 3);
     await createLinkTag(2, 3);
-    await createLinkTag(2, 2);
+    await createLinkTag(2, 3);
+    await createLinkTag(3, 2);
     console.log("Finished creating link tags");
 
     console.log("Attaching tags to link!");
