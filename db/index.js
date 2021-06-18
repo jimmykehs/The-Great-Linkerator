@@ -33,7 +33,7 @@ async function createLink({
 }
 
 //createTags
-async function createTags({ tag_content }) {
+async function createTags(tag_content) {
   try {
     const { rows } = await client.query(
       `

@@ -14,7 +14,6 @@ const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
   const [url, setUrl] = useState();
   const [tags, setTags] = useState([]);
   const [comment, setComment] = useState();
-  const [date, setDate] = useState();
 
   useEffect(() => {
     async function getAllTags() {
@@ -112,7 +111,6 @@ const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
       </div>
 
       <Modal
-        style={{ opacity: 1 }}
         isOpen={newBookmark}
         onRequestClose={() => setnewBookmark(false)}
       >
@@ -151,14 +149,6 @@ const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
               placeholder="Comment"
               id="bookmark-comment"
               onInput={(event) => setComment(event.target.value)}
-            />
-
-            <input
-              type="date"
-              placeholder="Date"
-              id="bookmark-date"
-              onInput={(event) => setDate(event.target.value)}
-              required
             />
 
             <button class="btn" type="submit" onClick={() => {}}>
