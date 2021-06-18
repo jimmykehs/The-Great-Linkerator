@@ -6,6 +6,7 @@ import { updateLink, deleteLink } from "../../api";
 
 
 const BookmarkRow = ({ bookmark }) => {
+
   const {
     id,
     link_name,

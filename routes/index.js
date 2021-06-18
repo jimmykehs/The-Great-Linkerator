@@ -111,12 +111,10 @@ apiRouter.patch("/tags", async (req, res, next) => {
 apiRouter.delete("/links/:id", async (req, res, next) => {
   const { id } = req.params
   try {
-    console.log("delete Route", id)
     const deletedLink = await deleteLink(id)
     res.send({
       message: deletedLink
     })
-    console.log(deletedLink)
   } catch ({name, messages}) {
       next({name, messages})
   }
@@ -126,15 +124,3 @@ module.exports = apiRouter;
 
 
 
-
-    // if (link) {
-    //   const deletedLink = await deleteLink(id)
-    //   res.send({
-    //     message: deletedLink
-    //   })
-    // } else {
-    //     next({
-    //       name: 'Delete Link Error',
-    //       message: 'Error Deleting Link',
-    //     })
-    // }
