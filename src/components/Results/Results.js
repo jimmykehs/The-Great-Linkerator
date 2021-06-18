@@ -16,7 +16,7 @@ const Results = ({ searchResults }) => {
     <div class="Results">
       <TableContainer component={Paper}>
         <Table>
-          <TableHead>
+          <TableHead id="grid">
             <TableRow>
               <TableCell>Name</TableCell>
               <TableCell>Comment</TableCell>
