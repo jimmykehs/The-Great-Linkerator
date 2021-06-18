@@ -3,14 +3,12 @@ const apiRouter = require("express").Router();
 const {
   createLink,
   createTags,
-  getAllLinks,
   getAllTags,
-  getAllLinkTags,
   createLinkTag,
   updateClickCount,
   getAllLinksWithTags,
   getTagByContent,
-  deleteLink
+  deleteLink,
 } = require("../db");
 
 //getAllLinks
@@ -38,7 +36,7 @@ apiRouter.get("/tags", async (req, res, next) => {
   }
 });
 
-//CreateLinkTag       
+//CreateLinkTag
 apiRouter.post("/links/post", async (req, res, next) => {
   const { name, url, comment, tags = "" } = req.body;
   const tagsArr = tags.trim().split(", ");
@@ -106,21 +104,16 @@ apiRouter.patch("/tags", async (req, res, next) => {
   }
 });
 
-
-
 apiRouter.delete("/links/:id", async (req, res, next) => {
-  const { id } = req.params
+  const { id } = req.params;
   try {
-    const deletedLink = await deleteLink(id)
+    const deletedLink = await deleteLink(id);
     res.send({
-      message: deletedLink
-    })
-  } catch ({name, messages}) {
-      next({name, messages})
+      message: deletedLink,
+    });
+  } catch ({ name, messages }) {
+    next({ name, messages });
   }
-})
+});
 
 module.exports = apiRouter;
-
-
-

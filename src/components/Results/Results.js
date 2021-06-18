@@ -13,7 +13,7 @@ import {
 
 const Results = ({ searchResults }) => {
   return (
-    <div class="Results">
+    <div className="Results">
       <TableContainer component={Paper}>
         <Table>
           <TableHead id="grid">
