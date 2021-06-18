@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { TableRow, TableCell } from "@material-ui/core";
 import { Delete as DeleteIcon } from '@material-ui/icons';
 import "./BookmarkRow.css";
-import { updateLink } from "../../api";
+import { updateLink, deleteLink } from "../../api";
 
 
 const BookmarkRow = ({ bookmark }) => {
@@ -27,21 +27,10 @@ const BookmarkRow = ({ bookmark }) => {
   };
 
 
-
   const onDelete = (id) => {
-    
-    fetch(`/api/links`, {
-      method: "DELETE", 
-      headers: {
-        "Content-Type": 'application/json',
-      },
-    }).then((response) => response.json())
-      .then((result) => {
-        console.log(result)
-      })
-      .catch(console.error)
+    deleteLink(id)
+    window.location.reload();
   }
-
 
   return (
     <TableRow>

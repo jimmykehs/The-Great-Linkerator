@@ -184,6 +184,26 @@ async function attachTagsToLink(allLinks) {
   return allLinks;
 }
 
+
+async function deleteLink(id) {
+  try {
+    await client.query(`
+    DELETE FROM link_tags
+    WHERE "linkId" = $1;
+    `, [id]);
+
+    const { rows } = await client.query(`
+    DELETE FROM links
+    WHERE id = $1
+    RETURNING *;
+    `, [id]);
+
+    return rows
+  } catch (error) {
+    throw error
+  }
+}
+
 // export
 module.exports = {
   client,
@@ -197,4 +217,8 @@ module.exports = {
   getAllLinksWithTags,
   attachTagsToLink,
   getTagByContent,
+  deleteLink
 };
+
+
+

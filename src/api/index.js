@@ -80,7 +80,7 @@ export async function updateLink({ id, count }) {
 
 export async function deleteLink(id) {
   try {
-    const data = await axios.delete(`/api/links`)
+    const { data } = await axios.delete(`/api/links/${id}`)
     return data
   } catch (error) {
     throw error
