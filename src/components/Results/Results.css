@@ -17,21 +17,6 @@
   text-align: center;
 }
 
-<<<<<<< HEAD
-#grid{
-  background: grey;
-}
-
-#table{
-  background: rgba(19, 19, 19, .7);
-  color: white;
-  
-}
-/* #table:hover{
-  transform:scale(1.06);
-} */
-=======
 .Results-Table {
   overflow-y: scroll;
 }
->>>>>>> b54d6f5b7380f30fbf90c12984fde2b70987a869
