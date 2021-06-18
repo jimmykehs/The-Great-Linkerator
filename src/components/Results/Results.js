@@ -13,25 +13,27 @@ import {
 
 const Results = ({ searchResults }) => {
   return (
-    <TableContainer component={Paper}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell>Comment</TableCell>
-            <TableCell>Click Count</TableCell>
-            <TableCell>Tags</TableCell>
-            <TableCell>Creation Date</TableCell>
-            <TableCell>Delete</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {searchResults.map((bookmark) => {
-            return <BookmarkRow key={bookmark.id} bookmark={bookmark} />;
-          })}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <div class="Results">
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell>Comment</TableCell>
+              <TableCell>Click Count</TableCell>
+              <TableCell>Tags</TableCell>
+              <TableCell>Creation Date</TableCell>
+              <TableCell>Delete</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {searchResults.map((bookmark) => {
+              return <BookmarkRow key={bookmark.id} bookmark={bookmark} />;
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
   );
 };
 

@@ -5,17 +5,8 @@
   overflow-y: scroll;
 }
 
-table {
-  max-height: 100%;
-}
-
 .Result-Headers {
   height: 5%;
-}
-
-th,
-td {
-  padding: 30px;
 }
 
 .Bookmark-Row {
@@ -24,4 +15,8 @@ td {
 
 .Bookmark-Row td {
   text-align: center;
+}
+
+.Results-Table {
+  overflow-y: scroll;
 }
