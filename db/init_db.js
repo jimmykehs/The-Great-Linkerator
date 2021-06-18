@@ -31,7 +31,7 @@ async function buildTables() {
         link_image_id INT NULL,
         link_view_count INT NULL,
         link_comment varchar(255) NULL,
-        creationDT DATE NOT NULL DEFAULT CURRENT_DATE
+        creationDT DATE NOT NULL,
        );
       CREATE TABLE tags(
           ID SERIAL PRIMARY KEY,	

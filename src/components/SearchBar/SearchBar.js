@@ -138,7 +138,6 @@ const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
       </div>
 
       <Modal
-        style={{ opacity: 1 }}
         isOpen={newBookmark}
         onRequestClose={() => setnewBookmark(false)}
       >
@@ -178,7 +177,12 @@ const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
               id="bookmark-comment"
               onInput={(event) => setComment(event.target.value)}
             />
+
+
+            <button class="btn" type="submit" onClick={() => {}}>
+
             <button className="btn" type="submit" onClick={() => {}}>
+
               Add Bookmark
             </button>
           </form>
