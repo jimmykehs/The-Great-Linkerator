@@ -3,7 +3,7 @@ import "./SearchBar.css";
 import Modal from "react-modal";
 import { useState, useEffect } from "react";
 import { TextField } from "@material-ui/core";
-import { createLink, getTags } from "../../api";
+import { getTags } from "../../api";
 
 const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
   const [allTags, setAllTags] = useState([]);

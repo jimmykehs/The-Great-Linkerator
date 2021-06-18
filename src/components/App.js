@@ -12,7 +12,6 @@ const App = () => {
   useEffect(() => {
     async function fetchBookmarks() {
       const { links } = await getLinks();
-      console.log(links);
       setAllBookmarks(links);
       setSearchResults(links);
     }
