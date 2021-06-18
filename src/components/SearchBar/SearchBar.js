@@ -73,6 +73,23 @@ const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
     }
   }
 
+  function sortByTag(tagID) {
+    const allResultsCopy = [...allBookmarks];
+    if (tagID === -1) {
+      setSearchResults(allResultsCopy);
+    } else {
+      const sortedArr = [];
+      allResultsCopy.forEach((result) => {
+        result.tags.forEach((tag) => {
+          if (tag.tagId === tagID) {
+            sortedArr.push(result);
+          }
+        });
+      });
+      setSearchResults(sortedArr);
+    }
+  }
+
   return (
     <>
       <div className="Search-Container">
@@ -85,9 +102,19 @@ const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
             setSearchTerm(event.target.value);
           }}
         />
-        <select>
+        <select
+          className="Sort-Select"
+          onChange={(event) => {
+            sortByTag(parseInt(event.target.value));
+          }}
+        >
+          <option value="-1">Sort by Tag</option>
           {allTags.map((tag) => {
-            return <option>{tag.tag_content}</option>;
+            return (
+              <option key={tag.id} value={tag.id}>
+                {tag.tag_content}
+              </option>
+            );
           })}
         </select>
         <select
@@ -114,10 +141,10 @@ const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
         isOpen={newBookmark}
         onRequestClose={() => setnewBookmark(false)}
       >
-        <div class="bookmark-forms">
-          <form class="new-bookmark" onSubmit={addNewBookmark}>
+        <div className="bookmark-forms">
+          <form className="new-bookmark" onSubmit={addNewBookmark}>
             <i
-              class="fa fa-times"
+              className="fa fa-times"
               aria-hidden="true"
               onClick={() => {
                 setnewBookmark(false);
@@ -151,7 +178,11 @@ const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
               onInput={(event) => setComment(event.target.value)}
             />
 
+
             <button class="btn" type="submit" onClick={() => {}}>
+
+            <button className="btn" type="submit" onClick={() => {}}>
+
               Add Bookmark
             </button>
           </form>

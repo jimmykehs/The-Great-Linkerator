@@ -30,7 +30,6 @@ export async function getTags() {
   }
 }
 
-//
 export async function getLinksById(id) {
   try {
     const { data } = await axios.get(`/api/links/:id`);
@@ -51,7 +50,7 @@ export async function getTagsById(id) {
   }
 }
 
-export async function createLink({ url, comment, tags }) {
+export async function createLink({ url, comment, tags = [] }) {
   try {
     const data = await axios.post(`/api/links`, {
       url: `${url}`,
@@ -67,7 +66,7 @@ export async function createLink({ url, comment, tags }) {
 
 export async function updateLink({ id, count }) {
   try {
-    console.log("starting to update count");
+    console.log("starting to update count")
     const data = await axios.patch(`/api/links/${id}`, {
       count,
     });
@@ -75,5 +74,15 @@ export async function updateLink({ id, count }) {
     return data;
   } catch (error) {
     throw error;
+  }
+}
+
+
+export async function deleteLink(id) {
+  try {
+    const data = await axios.delete(`/api/links`)
+    return data
+  } catch (error) {
+    throw error
   }
 }

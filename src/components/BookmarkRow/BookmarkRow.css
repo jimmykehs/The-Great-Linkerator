@@ -1,6 +1,6 @@
 .Bookmark-Link {
   text-decoration: none;
-  color: black;
+  color: rgb(4, 55, 221);
   font-size: 2rem;
 }
 
@@ -11,5 +11,14 @@
 .Link {
   text-decoration: none;
   font-size: 1.5rem;
+  color: rgb(6, 6, 240);
+}
+
+.Trash {
+  color:rgb(124, 122, 122);
+}
+
+.Trash:hover {
   color: black;
+  cursor: pointer;
 }

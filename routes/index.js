@@ -1,16 +1,15 @@
 const apiRouter = require("express").Router();
 
 const {
-  //client,
   createLink,
-  //createTags,
+  createTags,
   getAllLinks,
   getAllTags,
   getAllLinkTags,
   createLinkTag,
   updateClickCount,
   getAllLinksWithTags,
-  // attachTagsToLink
+  getTagByContent,
 } = require("../db");
 
 //getAllLinks
@@ -38,10 +37,10 @@ apiRouter.get("/tags", async (req, res, next) => {
   }
 });
 
-//CreateLinkTag         ***NEEDS WORK 500 ERROR***
+//CreateLinkTag       
 apiRouter.post("/links/post", async (req, res, next) => {
   const { name, url, comment, tags = "" } = req.body;
-  const tagsArr = tags.trim().split(",");
+  const tagsArr = tags.trim().split(", ");
 
   try {
     const linkData = {
@@ -54,23 +53,18 @@ apiRouter.post("/links/post", async (req, res, next) => {
 
     //Grabs id of Link
     const linkId = newLink.id;
-    console.log(linkId);
-    console.log(tagsArr);
 
-    // if (tagsArr.length > 0) {
-    //   tagsArr.map(async (tag) => {
-    //     const existingTag = await getTagsByContent(tag);
-
-    //     if (existingTag) {
-    //       console.log("It exists! Here is the ID: ", existingTag.id);
-    //       // createTagLink(linkId, tagId)
-    //     } else {
-    //       const newTag = createTag(tag);
-    //       console.log("Tag was created! Here is the ID for it!:", newTag.id);
-    //       // createTagLink(linkId, tagId)
-    //     }
-    //   });
-    // }
+    if (tagsArr.length > 0) {
+      tagsArr.map(async (tag) => {
+        const existingTag = await getTagByContent(tag);
+        if (existingTag === undefined) {
+          const newTag = await createTags(tag);
+          createLinkTag(linkId, newTag.id);
+        } else {
+          createLinkTag(linkId, existingTag.id);
+        }
+      });
+    }
 
     if (newLink) {
       res.send({ linkData });
@@ -86,13 +80,11 @@ apiRouter.post("/links/post", async (req, res, next) => {
 });
 
 apiRouter.patch("/links/:id", async (req, res, next) => {
-  console.log("In the correct route");
   const { id } = req.params;
   const { count } = req.body;
 
   try {
     const updatedLink = await updateClickCount(id, count);
-    console.log(updatedLink, "Here lies the updated link");
     if (updatedLink) {
       res.send({ link: updatedLink });
     } else {
@@ -115,20 +107,3 @@ apiRouter.patch("/tags", async (req, res, next) => {
 
 module.exports = apiRouter;
 
-// apiRouter.patch("/links/count", async (req, res, next) => {
-//   try {
-
-//   } catch ({name, messages}) {
-//       next({next, messages})
-//   }
-// })
-
-// //getAllLinkTagsWithTags
-// apiRouter.get("/links/:tagName", async (req, res, next) => {
-//   const { tagName } = req.params
-//   try {
-//     const linkTags = await getAllLinksWithTags(tagName)
-//   } catch (error) {
-
-//   }
-// })
