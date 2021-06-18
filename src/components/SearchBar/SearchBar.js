@@ -41,7 +41,6 @@ const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
         body: JSON.stringify({ name, url, comment, tags }),
       });
       const data = await response.json();
-      console.log(data);
       setnewBookmark(false);
       window.location.reload();
     } catch (error) {
@@ -138,6 +137,7 @@ const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
       </div>
 
       <Modal
+        style={{ opacity: 1 }}
         isOpen={newBookmark}
         onRequestClose={() => setnewBookmark(false)}
       >
@@ -177,12 +177,7 @@ const SearchBar = ({ allBookmarks, setSearchResults, searchResults }) => {
               id="bookmark-comment"
               onInput={(event) => setComment(event.target.value)}
             />
-
-
-            <button class="btn" type="submit" onClick={() => {}}>
-
-            <button className="btn" type="submit" onClick={() => {}}>
-
+            <button className="btn" type="submit">
               Add Bookmark
             </button>
           </form>
